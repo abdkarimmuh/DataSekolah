@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 public class DataSiswa {
     //File Database
     static File FILES = new File("data.txt"); 
-    static int ID_COUNT = 1;
+    static int ID_COUNT = 0;
     String nama, nis, grade;
     int tugas, kehadiran, uts, uas, na, nilai;
     
@@ -51,33 +51,42 @@ public class DataSiswa {
         } catch (Exception e) {return 0;}
     }
     
+    public static void setData(){
+        DataSiswa ds = new DataSiswa();
+        ds.inputData();
+    }
+    
+    public static void removeData(){
+        DataSiswa ds = new DataSiswa();
+        ds.remData();
+    }
+    
     /*
     Untuk menambahkan data
     */
-    public static void setData() {
-        DataSiswa ds = new DataSiswa();
-        
+    public void inputData() {
+               
         Scanner in = new Scanner(System.in);
         System.out.print("Nama Lengkap : ");
-        ds.nama = in.nextLine();
+        nama = in.nextLine();
         System.out.print("NIS : ");
-        ds.nis = in.nextLine();
+        nis = in.nextLine();
         
         try {
-            checkValue(ds.tugas, "Tugas");
-            ds.tugas = ds.nilai;
-            checkValue(ds.kehadiran, "Kehadiran");
-            ds.kehadiran = ds.nilai;
-            checkValue(ds.uts, "UTS");
-            ds.uts = ds.nilai;
-            checkValue(ds.uas, "UAS");
-            ds.uas = ds.nilai;
+            checkValue(tugas, "Tugas");
+            tugas = nilai;
+            checkValue(kehadiran, "Kehadiran");
+            kehadiran = nilai;
+            checkValue(uts, "UTS");
+            uts = nilai;
+            checkValue(uas, "UAS");
+            uas = nilai;
         } catch (Exception e) {
             System.out.println("Maaf anda harus memasukan angka");
-            setData();
+            inputData();
         }
         
-        processValue(ds.tugas, ds.kehadiran, ds.uts, ds.uas);
+        processValue(tugas, kehadiran, uts, uas);
         showValue();
         
     }
@@ -85,26 +94,24 @@ public class DataSiswa {
     /*
     Untuk mengecek nilai
     */
-    private static int checkValue(int nilai, String kata){
-        DataSiswa ds = new DataSiswa();
+    private int checkValue(int nilai, String kata){
         do {
             System.out.print("Nilai " + kata + " (0-100) : ");
             Scanner in = new Scanner(System.in);
             nilai = in.nextInt();
-            ds.nilai = nilai;
+            this.nilai = nilai;
             if (nilai > 100) {
                 System.out.println("Angka tidak boleh lebih dari 100 dan kurang dari 0");
             }
         } while (nilai > 100);
-        return ds.nilai;
+        return this.nilai;
     }
     
     /*
     Untuk proses nilai
     */
-    private static void processValue(int tugas, int kehadiran, int uts, int uas){
-        DataSiswa ds = new DataSiswa();
-        ds.na = (tugas+kehadiran+uts+uas)/4;
+    private void processValue(int tugas, int kehadiran, int uts, int uas){
+        this.na = (tugas+kehadiran+uts+uas)/4;
         /* 
         100 - 86 = A
         85 - 71 = B
@@ -112,29 +119,29 @@ public class DataSiswa {
         55 - 41 = D
         40 - 0 = E
         */
-        if (ds.na > 85){
-            ds.grade = "A";
-        } else if (ds.na > 70) {
-            ds.grade = "B";
-        } else if (ds.na > 55) {
-            ds.grade = "C";
-        } else if (ds.na > 40) {
-            ds.grade = "D";
+        if (na > 85){
+            grade = "A";
+        } else if (na > 70) {
+            grade = "B";
+        } else if (na > 55) {
+            grade = "C";
+        } else if (na > 40) {
+            grade = "D";
         } else {
-            ds.grade = "E";
+            grade = "E";
         }        
     }
     
-    private static void showValue(){
-        DataSiswa ds = new DataSiswa();
-        
+    private void showValue(){
+               
         Scanner pil = new Scanner(System.in);
         String pilihan;
-        System.out.println("Siswa yang bernama : " + ds.nama);
-        System.out.println("Dengan NIS : " + ds.nis);
+        System.out.println("\n===========================");
+        System.out.println("Siswa yang bernama : " + this.nama);
+        System.out.println("Dengan NIS : " + this.nis);
         
-        System.out.println("Mendapatkan Nilai Akhir sebesar : " + ds.na +
-                " dengan grade " + ds.grade);
+        System.out.println("Mendapatkan Nilai Akhir sebesar : " + this.na +
+                " dengan grade " + this.grade);
         
         System.out.println("\n1. Simpan \n2. Tulis Ulang \n3. Kembali");
         System.out.print("=> ");
@@ -143,7 +150,7 @@ public class DataSiswa {
             saveData();
             Menu.showMenu();
         } else if (pilihan.equals("2")) {
-            setData();
+            inputData();
         } else if (pilihan.equals("3")) {
             Menu.showMenu();
         } else if (pilihan.isEmpty()) {
@@ -158,13 +165,12 @@ public class DataSiswa {
     /*
     Untuk menambahkan data
     */
-    public static void saveData() {
-        DataSiswa ds = new DataSiswa();
-        
+    public void saveData() {
+              
         try {
             //Cek File
             if (!FILES.exists()) {fileDatabase();}
-            GeneralData siswa = new GeneralData(dataCount(), ds.nama, ds.nis, ds.na, ds.grade);
+            GeneralData siswa = new GeneralData(dataCount(), this.nama, this.nis, this.na, this.grade);
             PrintWriter out = new PrintWriter(new FileWriter(FILES.getAbsoluteFile(), true));
             out.write(
                 siswa.getId() + " | " + 
@@ -182,7 +188,7 @@ public class DataSiswa {
     */
     public static void getData() {
         System.out.println("----------------------------------------------------------");
-        System.out.println("| ID\t | Nama Lengkap\t\t | NIS\t | NA\t | Grade |");
+        System.out.println("| ID\t | Nama Lengkap\t\t | NIS\t\t | NA\t | Grade |");
         System.out.println("----------------------------------------------------------");
         try {
             //Cek File
@@ -217,7 +223,7 @@ public class DataSiswa {
     /*
     Untuk menghapus data
     */
-    public static void remData() {
+    public void remData() {
         try {
             if (FILES.exists()) {
                 Scanner in = new Scanner(System.in);

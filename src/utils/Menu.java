@@ -38,14 +38,13 @@ public class Menu {
                 DataSiswa.setData();
                 break;
             case 2:
-                DataSiswa.remData();
+                DataSiswa.removeData();
                 break;
             case 3:
                 DataSiswa.getData();
                 break;
             case 4:
-                System.out.println("TENTANG");
-                //DataSiswa.getData();
+                About.getAbout();
                 break;
             case 5:
                 System.out.println("KELUAR");

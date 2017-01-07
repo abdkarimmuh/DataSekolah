@@ -11,6 +11,6 @@ package utils;
  */
 public class About {
     public static void getAbout(){
-        System.out.println();
+        System.out.println("Tentang kami");
     }
 }
