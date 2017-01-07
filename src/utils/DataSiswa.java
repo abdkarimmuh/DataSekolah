@@ -187,9 +187,9 @@ public class DataSiswa {
     Mendapatkan semua data
     */
     public static void getData() {
-        System.out.println("----------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------");
         System.out.println("| ID\t | Nama Lengkap\t\t | NIS\t\t | NA\t | Grade |");
-        System.out.println("----------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------");
         try {
             //Cek File
             if (!FILES.exists()) {
@@ -210,14 +210,14 @@ public class DataSiswa {
                         String nis = t.trim().split(Pattern.quote("|"))[2].trim();
                         String na = t.trim().split(Pattern.quote("|"))[3].trim();
                         String grade = t.trim().split(Pattern.quote("|"))[4].trim();
-                        System.out.println("| " + id + "\t | " + nama + "\t | " + nis + "\t | " + na + "\t | " + grade + "\t|");
+                        System.out.println("| " + id + "\t | " + nama + "\t | " + nis + "\t | " + na + "\t |   " + grade + "   |");
                     } else {
                         System.out.println("Data belum ada.");
                     }
                 });
             }
         } catch (Exception e) {}
-        System.out.println("--------------------------------------------------");
+        System.out.println("------------------------------------------------------------------");
     }
     
     /*
