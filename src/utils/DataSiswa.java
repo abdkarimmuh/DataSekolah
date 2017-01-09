@@ -142,6 +142,7 @@ public class DataSiswa {
         pilihan = pil.nextLine();
         if (pilihan.equals("1")) {
             saveData();
+            System.out.println("Data berhasil disimpan");
             Menu.showMenu();
         } else if (pilihan.equals("2")) {
             inputData();
@@ -171,7 +172,7 @@ public class DataSiswa {
                 siswa.getNama() + " | " +
                 siswa.getNis() + " | " +
                 siswa.getNa() + " | " +
-                siswa.getGrade() + "\n\r"
+                siswa.getGrade() + "\r\n"
             );
             out.close();
         } catch (Exception e) {}

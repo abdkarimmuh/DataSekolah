@@ -28,7 +28,9 @@ public class Login extends Abstract {
         pass = in.nextLine();
         
         if (user.equals(auth.getUsername()) && pass.equals(auth.getPassword())){
-            System.out.println("");
+            System.out.println("\nSuccess");
+            System.out.println("\nPress any key to return to continue...");
+            System.in.read();//pause console
             Menu.showMenu();
         } else {
             System.out.println("Maaf username atau password anda salah");

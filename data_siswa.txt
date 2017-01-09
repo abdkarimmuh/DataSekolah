@@ -1,2 +1,4 @@
 1 | Muhammad Abdul Karim | 0110215053 | 100 | A
 2 | Aslam Pangestu | 0110215001 | 100 | A
+3 | Muhammad Abdul Karim | 0110215053 | 100 | A
+5 | Karimmmmmmmmm | 01110215055 | 85 | B
