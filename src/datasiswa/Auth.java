@@ -10,8 +10,8 @@ package datasiswa;
  * @author Karim
  */
 public class Auth {
-    private final String username = "1";
-    private final String password = "1";
+    private final String username = "admin";
+    private final String password = "password";
 
     public String getUsername() {
         return username;
