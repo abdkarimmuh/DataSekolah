@@ -5,6 +5,8 @@
  */
 package utils;
 
+import java.io.IOException;
+import static java.lang.System.exit;
 import java.util.Scanner;
 
 /**
@@ -12,18 +14,17 @@ import java.util.Scanner;
  * @author Karim
  */
 public class Menu {
-    public static void showMenu() {
+    public static void showMenu() throws IOException {
       Scanner in = new Scanner(System.in);
       int menu = 0;
-      do {
+      while (menu != 4) {
         System.out.println("==============================");
         System.out.println("=         Menu Utama         =");
         System.out.println("==============================");
         System.out.println("1. Tambah Data");
-        System.out.println("2. Hapus Data");
-        System.out.println("3. Lihat Data Siswa");
-        System.out.println("4. Tentang");
-        System.out.println("5. Keluar");
+        System.out.println("2. Lihat Data Siswa");
+        System.out.println("3. Tentang");
+        System.out.println("4. Keluar");
         System.out.println("=============================");
         System.out.print("Pilih Menu : ");
         try {
@@ -33,25 +34,23 @@ public class Menu {
             showMenu();
             break;
         }
-        switch (menu) {
-            case 1:
-                DataSiswa.setData();
-                break;
-            case 2:
-                DataSiswa.removeData();
-                break;
-            case 3:
-                DataSiswa.getData();
-                break;
-            case 4:
-                About.getAbout();
-                break;
-            case 5:
-                System.out.println("KELUAR");
-                break;
-            default :
-                System.out.println("Masukan angka 1-4");
-        }
-      } while (menu != 5);
+          switch (menu) {
+              case 1:
+                  DataSiswa.setData();
+                  break;
+              case 2:
+                  DataSiswa.getData();
+                  break;
+              case 3:
+                  About.showAbout();
+                  break;
+              case 4:
+                  System.out.println("KELUAR");
+                  exit(0);
+              default:
+                  System.out.println("Masukan angka 1-4");
+                  break;
+          }
+      }
     }
 }

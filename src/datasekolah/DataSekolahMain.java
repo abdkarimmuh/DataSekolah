@@ -5,6 +5,8 @@
  */
 package datasekolah;
 
+import abstractsekolah.Abstract;
+import java.io.IOException;
 import utils.Login;
 
 /**
@@ -16,9 +18,11 @@ public class DataSekolahMain {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        Login.login();
+        Abstract abs = new Login();
+        abs.login();
     }
     
 }

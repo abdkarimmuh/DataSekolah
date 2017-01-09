@@ -5,15 +5,18 @@
  */
 package utils;
 
+import abstractsekolah.Abstract;
 import datasiswa.Auth;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
  *
  * @author Karim
  */
-public class Login {
-    public static void login() {
+public class Login extends Abstract {
+    @Override
+    public void login() throws IOException {
         String user, pass;
         Scanner in = new Scanner(System.in);
         Auth auth = new Auth();

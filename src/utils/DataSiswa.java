@@ -6,11 +6,10 @@
 package utils;
 
 import datasiswa.GeneralData;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -22,7 +21,7 @@ import java.util.regex.Pattern;
  */
 public class DataSiswa {
     //File Database
-    static File FILES = new File("data.txt"); 
+    static File FILES = new File("data_siswa.txt"); 
     static int ID_COUNT = 0;
     String nama, nis, grade;
     int tugas, kehadiran, uts, uas, na, nilai;
@@ -51,20 +50,15 @@ public class DataSiswa {
         } catch (Exception e) {return 0;}
     }
     
-    public static void setData(){
+    public static void setData() throws IOException{
         DataSiswa ds = new DataSiswa();
         ds.inputData();
-    }
-    
-    public static void removeData(){
-        DataSiswa ds = new DataSiswa();
-        ds.remData();
     }
     
     /*
     Untuk menambahkan data
     */
-    public void inputData() {
+    public void inputData() throws IOException {
                
         Scanner in = new Scanner(System.in);
         System.out.print("Nama Lengkap : ");
@@ -132,7 +126,7 @@ public class DataSiswa {
         }        
     }
     
-    private void showValue(){
+    private void showValue() throws IOException{
                
         Scanner pil = new Scanner(System.in);
         String pilihan;
@@ -177,7 +171,7 @@ public class DataSiswa {
                 siswa.getNama() + " | " +
                 siswa.getNis() + " | " +
                 siswa.getNa() + " | " +
-                siswa.getGrade() + "\n"
+                siswa.getGrade() + "\n\r"
             );
             out.close();
         } catch (Exception e) {}
@@ -218,31 +212,5 @@ public class DataSiswa {
             }
         } catch (Exception e) {}
         System.out.println("------------------------------------------------------------------");
-    }
-    
-    /*
-    Untuk menghapus data
-    */
-    public void remData() {
-        try {
-            if (FILES.exists()) {
-                Scanner in = new Scanner(System.in);
-                System.out.print("ID : ");
-                String id = in.nextLine();
-                File cadang = new File(FILES.getAbsolutePath() + ".tmp");
-                BufferedReader reader = new BufferedReader(new FileReader(FILES));
-                BufferedWriter writer = new BufferedWriter(new FileWriter(cadang));   
-                String currentLine;
-                while((currentLine = reader.readLine()) != null) {
-                    if(currentLine.contains(id)) continue;
-                    writer.write(currentLine + "\n");
-                }
-                writer.close(); 
-                reader.close(); 
-                cadang.renameTo(FILES);
-            } else {
-                System.out.println("Tidak ada data untuk dihapus.");
-            }
-        } catch (Exception e){}
     }
 }
